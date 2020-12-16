@@ -28,7 +28,7 @@ MAINFILE = $(OUTDIR)/$(TARGET).bin
 STM32_PATH = $(HOME)/opt/STM32CubeF3
 CMSIS_PATH = $(STM32_PATH)/Drivers/CMSIS
 
-PROJ := src/template
+PROJ := src/ampelschaltung
 
 # SOURCES: list of input source sources
 SOURCEDIR = $(PROJ)/Src

@@ -1,51 +1,44 @@
-# Template project for the STM32F3Discovery Board
+# Syt Labor 711 EmbDev Hardware Programming
 
-This is a template repository for getting the main peripherals working on a [STM32F3Discovery](http://www.st.com/web/en/catalog/tools/FM116/SC959/SS1532/PF254044) board.
+**Giovanni Winter, 16.12.2020**
 
-## Toolchain
+# Setup
 
-To get all dependencies and be ready to flash the STM32F3 Board, install the following packages on your distribution:
+[Template auf Github](https://github.com/mborko/stm32f3-template)
 
-#### Debian based
-```bash
-apt install cmake libusb-dev libusb-1.0-0-dev build-essential autoconf \
-cutecom git binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi
+[Aufgabenstellung](https://elearning.tgm.ac.at/mod/assign/view.php?id=144370)
 
-apt install rpm pkg-config debhelper # for flash-tool build process
-```
-#### Arch based
-```bash
-pacman -S cmake libusb libusb-compat autoconf git arm-none-eabi-binutils \
-arm-none-eabi-gcc arm-none-eabi-gdb arm-none-eabi-newlib
-```
-
-## Flash-Tool
-
-The newest Flash-Tool for the STM-Boards can be found at [STLINK](https://github.com/texane/stlink). Clone it and make a debian package, which then can be installed via dpkg:
+Das komplette Template habe ich kopiert und auf [mein Repository](https://github.com/GiovanniWinter/Syt711_EmbDev_HardwareProgramming) geladen.
 
 ```bash
-git clone https://github.com/texane/stlink
-cd stlink 
-make clean
-make package
-sudo dpkg -i build/Release/dist/stlink_1.6.1-96-gbf41f14-1_amd64.deb
-sudo ldconfig # refresh library list for st-link
+git remote add origin https://github.com/GiovanniWinter/Syt711_EmbDev_HardwareProgramming.git
+git branch -M main
+git push -u origin main
+(falls es ein Origin schon gibt: git remote remove origin)
 ```
 
-## Additional Resources
+Weiters habe ich unter *src* den Ordner *Template* kopiert und auf **ampelschaltung** unbenannt und darin die Änderungen der `main.c` unternommen.
 
-Clone the [STM32Cube-F3](https://github.com/STMicroelectronics/STM32CubeF3) Library to the ```~/opt``` Folder or any other destination.
-Check the **STM32_PATH** Definition in the Makefile and change it aproperly.
+# Makefile
 
-[STM32F303VC Product Page](http://www.st.com/web/catalog/mmc/FM141/SC1169/SS1576/LN1531/PF252054)  
-[STM32F303xC Datasheet](http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00058181.pdf)  
-[STM32F3 Family Reference Manual](http://www.st.com/st-web-ui/static/active/en/resource/technical/document/reference_manual/DM00043574.pdf)  
-[Cortex-M4 Technical Reference Manual](http://infocenter.arm.com/help/topic/com.arm.doc.ddi0439c/DDI0439C_cortex_m4_r0p1_trm.pdf)  
+Zeile 31 auf `PROJ := src/ampelschaltung` ändern.
 
-## Credits
-Thanks to Fabian Greif for his minimal example [repository](https://github.com/dergraaf/stm32f3_minimal) for the STM32F3-Discovery board.
-I wish also to thank Matthew Blythe and 'mohammedari' for theier good startpoints:  
-[Basic Template](https://github.com/mblythe86/stm32f3-discovery-basic-template)  
-[Test Makefile](https://github.com/mohammedari/stm32f3discovery-test-c)  
+# main.c
+
+Hier habe ich das initialisieren der Leds nur auf der beschränkt (rot, gelb, grün). 
+
+In der while Schleife rufe ich nur  `Toggle_Leds();` auf.
+
+Das Auskommentierte könnte man auch entfernen.
+
+![image-20201216105305933](C:\Users\Giovanni\AppData\Roaming\Typora\typora-user-images\image-20201216105305933.png)
+
+# Fragestellungen
 
 
+
+- ***Wie sind Datenblätter eines Mikrokontrollers und des Demo-Boards (z.B. STM32F3-Discovery) aufgebaut? Wo finde ich dabei die Interface Description der Toolchain?***
+
+In dem Technical Reference Manual des ARM Cortex-M4 Prozessor gibt es eine kurze Einführung der Interfaces im Chapter 1, *1.3 Interfaces*.
+
+Im STM32F3DISCOVERY User manual werden im *quick start*, Punkt 2.3 die development toolchains aufgelistet.
